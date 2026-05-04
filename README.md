@@ -1,105 +1,163 @@
-# 🦴 Bone Fracture Detection from X-rays Using Transfer Learning
+# 🦴 Bone Fracture Detection from X-ray Images using Transfer Learning
 
-This project focuses on developing a deep learning-based pipeline for detecting bone fractures from X-ray images using transfer learning. It demonstrates how computer vision and AI can support radiologists in early and accurate fracture diagnosis.
+## 📌 Overview
 
----
+This project presents a deep learning approach for automatic bone fracture detection in X-ray images using transfer learning.
 
-## 📁 Dataset
-
-Collected and combined over 40,000 X-ray images from **eight public datasets**, including:
-
-- GRAZPEDWRI-DX
-- MURA
-- MedPix
-- Radiopaedia
-- Orthopedic Image Database
-- Others
-
-### Labels:
-- `0`: No Fracture  
-- `1`: Fracture
+A large dataset of approximately **40,000 radiographs** was constructed by combining multiple public datasets. Three state-of-the-art convolutional neural network architectures were fine-tuned and evaluated for binary classification (fractured vs. non-fractured).
 
 ---
 
-## 🧪 Preprocessing
+## 🧠 Model Pipeline
 
-- Converted DICOM/PNG images to uniform format
-- Resized images to 224x224 resolution
-- Normalized pixel values
-- Applied data augmentation: flipping, rotation, contrast variation
-- Balanced classes through oversampling
-
----
-
-## 🧠 Models
-
-Used transfer learning with three architectures:
-
-1. **ResNet-50**  
-2. **EfficientNet-B0**  
-3. **MONAI DenseNet-121**
-
-Trained using PyTorch and MONAI with cross-entropy loss.
+```text
+X-ray Image
+    ↓
+Preprocessing (Resize + Normalization)
+    ↓
+Data Augmentation
+    ↓
+Transfer Learning Models
+    ↓
+Binary Classification (Fractured / Not Fractured)
+```
 
 ---
 
-## 📊 Evaluation Metrics
+## ⚙️ Models Used
 
-- **Accuracy**
-- **Precision**
-- **Recall**
-- **F1-score**
-- **Confusion Matrix**
-- **ROC-AUC**
+- ResNet-50  
+- EfficientNet-B0  
+- MONAI DenseNet-121  
 
-EfficientNet-B0 achieved the best performance (~98.9% test accuracy).
+All models were initialized with ImageNet pretrained weights and fine-tuned on the dataset.
 
 ---
 
-## ▶️ Usage
+## 📊 Dataset
+
+- ~40,000 X-ray images  
+- Combined from multiple Kaggle datasets and GRAZPEDWRI-DX dataset  
+- Binary labels:
+  - Fractured
+  - Not Fractured  
+
+Approximate distribution:
+- ~18,400 fractured  
+- ~22,400 non-fractured  
+
+---
+
+## 🧪 Training Details
+
+- Image size: 320 × 320  
+- Batch size: 256  
+- Optimizer: Adam  
+- Learning rate: 1e-4  
+- Loss function: CrossEntropyLoss  
+- Early stopping applied  
+
+### Data Augmentation
+- Random horizontal flip  
+- Random rotation (±15°)  
+- Brightness and contrast adjustments  
+
+---
+
+## 📈 Results
+
+| Model | Accuracy | Precision | Recall | F1-score |
+|------|--------|----------|--------|---------|
+| ResNet-50 | 98.8% | 98.1% | 98.5% | 98.3% |
+| DenseNet-121 | 98.7% | 98.4% | 98.6% | 98.5% |
+| EfficientNet-B0 | **98.9%** | **98.6%** | **98.7%** | **98.7%** |
+
+EfficientNet-B0 achieved the best overall performance.
+
+---
+
+## 📊 Results Visualization
+
+### Accuracy Curve
+![Accuracy](results/accuracy.png)
+
+### Loss Curve
+![Loss](results/loss.png)
+
+### ROC Curve
+![ROC](results/roc.png)
+
+### Confusion Matrix (EfficientNet-B0)
+![Confusion Matrix](results/confusion_matrix.png)
+
+---
+
+## 🛠️ Tech Stack
+
+- Python  
+- PyTorch  
+- MONAI  
+- OpenCV  
+- NumPy  
+
+---
+
+## 📂 Project Structure
+
+```text
+.
+├── README.md
+├── wrist_fracture.ipynb
+├── fracture_bone.pdf
+└── results/
+```
+
+---
+
+## 🚀 Usage
+
+Run the notebook:
 
 ```bash
-# Install dependencies
-pip install torch torchvision monai opencv-python
-
-# Run training
-python train.py
+jupyter notebook wrist_fracture.ipynb
 ```
 
 ---
 
-## 📂 Folder Structure
+## 📄 Report
 
-```
-bone_fracture_detection/
-├── data/
-│   └── train, test, valid sets
-├── models/
-│   └── best_model.pt
-├── outputs/
-│   └── metrics, plots, logs
-├── src/
-│   ├── dataset.py
-│   └── train.py
-└── README.md
+Full project report is available here:
+
+```text
+fracture_bone.pdf
 ```
 
 ---
 
-## 📌 Key Highlights
+## ⚠️ Limitations
 
-- Trained on diverse fracture types and body parts
-- Robust model performance with real-world deployment potential
-- Designed for clinical aid in emergency and orthopedic radiology
+- Dataset is not included  
+- Model weights are not included  
+- Evaluation performed on internal test set  
+- External validation is required for real-world deployment  
+
+---
+
+## 📈 Future Work
+
+- External dataset validation  
+- Fracture localization (object detection / Grad-CAM)  
+- Model deployment  
+- Integration into clinical workflow  
 
 ---
 
 ## 👨‍💻 Author
 
-Deniz Arda YILDIZ  
-Email: [denizarda.yildiz@protonmail.com] 
+Deniz Arda Yildiz  
+
 ---
 
-## 📝 License
+## ⭐ Notes
 
-This project is open-source and available under the MIT License.
+This project demonstrates a high-performance medical imaging system for fracture detection using transfer learning, achieving near-expert level accuracy.
