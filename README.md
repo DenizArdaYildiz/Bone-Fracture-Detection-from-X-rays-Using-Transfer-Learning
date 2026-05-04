@@ -78,17 +78,14 @@ EfficientNet-B0 achieved the best overall performance.
 
 ## 📊 Results Visualization
 
-### Accuracy Curve
-![Accuracy](results/accuracy.png)
+### Training vs Validation Accuracy
+![Accuracy](results/training_validation_accuracy%20(1).png)
 
-### Loss Curve
-![Loss](results/loss.png)
+### Training vs Validation Loss
+![Loss](results/training_validation_loss.png)
 
-### ROC Curve
-![ROC](results/roc.png)
-
-### Confusion Matrix (EfficientNet-B0)
-![Confusion Matrix](results/confusion_matrix.png)
+### Model Evaluation Metrics
+![Metrics](results/evaluation_metrics_barplot.png)
 
 ---
 
